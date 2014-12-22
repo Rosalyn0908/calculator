@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+var num;
+
+$(document).ready(function () {
+    $('.number').click(function () {
+        $('#display').append($(this).text());
+    });
+    $('#plus').click(function () {
+        $('#equals').click();
+        num = parseFloat($('#display').text());
+        $('#display').append('+');
+    });
+
+    $('#minus').click(function () {
+        $('#equals').click();
+        num = parseFloat($('#display').text());
+        $('#display').append('-');
+    });
+
+    $('#multiply').click(function () {
+        $('#equals').click();
+        num = parseFloat($('#display').text());
+        $('#display').append('*');
+    });
+
+    $('#divide').click(function () {
+        $('#equals').click();
+        num = parseFloat($('#display').text());
+        $('#display').append('/');
+    });
+
+    $('#delete').click(function () {
+        var displays_text = $('#display').text();
+        $('#display').text(displays_text.substring(0, displays_text.length - 1));
+
+    });
+
+    $('#equals').click(function () {
+        var displays_text = $('#display').text();
+        var result;
+        
+        if (displays_text.match(/\+/)) {
+            result = displays_text.match(/\+\d+/g); //.match() returns an array
+            
+            var total = 0;
+            var next_number;
+           
+            for (var x = 0; x < result.length; x++ ) {
+                next_number = parseFloat(result[x].replace('+', ''));
+                total = total + next_number;                
+            }
+            
+            $('#display').text(num + total);
+            
+        } 
+        else if (displays_text.match(/\-/)) {
+            result = displays_text.match(/\-\d+/); //.match() returns an array
+            var second_number = parseFloat(result[0].replace('-', ''));
+            $('#display').text(num - second_number);
+        }
+        else if (displays_text.match(/\*/)) {
+            result = displays_text.match(/\*\d+/); //.match() returns an array
+            var second_number = parseFloat(result[0].replace('*', ''));
+            $('#display').text(num * second_number);
+        }
+        else if (displays_text.match(/\//)) {
+            result = displays_text.match(/\/\d+/); //.match() returns an array
+            var second_number = parseFloat(result[0].replace('/', ''));
+            $('#display').text(num / second_number);
+        }
+
+
+
+    });
+
+});
+</script>
+
+<style>
+#box {
+    padding: 20px;
+    margin: 10px;
+    text-align:center;
+    width: 150px;
+    background-color: #F0F0FF;
+    background: -moz-linear-gradient(#F0F0FF, #C2C2FF);
+    background: linear-gradient(#F0F0FF, #C2C2FF);
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px 5px #4747B2;
+    font-family:"courier";
+}
+.number {
+    display: inline-table;
+    padding: 7px;
+    width:20px;
+    height: 10px;
+    border: 2px solid #C2C2F0;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 3px 3px 5px #6666FF;
+    -webkit-transition: box-shadow 2s;
+    /* For Safari 3.1 to 6.0 */
+    transition: width 2s;
+}
+.number:hover {
+    box-shadow:none;
+}
+#display {
+    background-color: #141433;
+    padding:2px;
+    margin: 5px;
+    color: #F0F0FF;
+    height: 30px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px #6666FF;
+    font-weight: bold;
+    line-height: 30px;
+    vertical-align:middle;
+}
+#display p {
+}
+#buttons {
+}
+#buttons div {
+    display: inline-block;
+    padding: 2px;
+    margin:2px;
+    width:37px;
+    height: 40px;
+    box-shadow: 3px 3px 5px #6666FF;
+    border: 2px solid #C2C2F0;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    -webkit-transition: box-shadow 2s;
+    /* For Safari 3.1 to 6.0 */
+    transition: width 2s;
+}
+#buttons div:hover {
+    box-shadow:none;
+}
+</style>
+</head>
+<body>
+
+<div id="box">
+    <div id="display"></div>
+    <div id="buttons">
+        <div id="equals">
+            <p>=</p>
+        </div>
+        <div id="plus">
+            <p>+</p>
+        </div>
+        <div id="minus">
+            <p>-</p>
+        </div>
+        <div id="multiply">
+            <p>*</p>
+        </div>
+        <div id="divide">
+            <p>/</p>
+        </div>
+        <div id="delete">
+            <p>del</p>
+        </div>
+    </div>
+    <p class="number">0</p>
+    <p class="number">1</p>
+    <p class="number">2</p>
+    <p class="number">3</p>
+    <p class="number">4</p>
+    <p class="number">5</p>
+    <p class="number">6</p>
+    <p class="number">7</p>
+    <p class="number">8</p>
+    <p class="number">9</p>
+    <p class="number">.</p>
+</div>
+
+</body>
+</html>
